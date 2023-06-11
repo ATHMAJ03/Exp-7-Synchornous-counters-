@@ -67,53 +67,60 @@ RegisterNumber: 212222240014
 */
 #### UP COUNTER:
 ```
-module sync(clk,A);
+module Counters(clk,A);
 input clk;
-output reg [0:2]A;
-always@(posedge clk)
+output reg [3:0]A;
+always @(posedge clk)
 begin
-   A[0]=(((A[1])&(A[2]))^A[0]);
-	A[1]=(A[2])^A[1];
-	A[2]=1^A[2];
+	A[3]=(((A[0])&(A[1])&(A[2]))^A[3]);
+	A[2]=(((A[0])&(A[1]))^A[2]);
+	A[1]=(A[0])^A[1];
+	A[0]=A[0]^1;
 end
 endmodule
 ```
 #### DOWN COUNTER:
 ```
-module down(input clk,input reset,output[0:3]counter);
-reg[0:3] counter_down;
-always@(posedge clk or posedge reset)
+module dCounters(clk,A);
+input clk;
+output reg [3:0]A;
+always@(posedge clk)
 begin
-if(reset)
-counter_down<=4'd0;
-else
-counter_down<=counter_down-4'd1;
+	A[3]=(((~A[0])&(~A[1])&(~A[2]))^A[3]);
+	A[2]=(((~A[0])&(~A[1]))^A[2]);
+	A[1]=(~A[0])^A[1];
+	A[0]=(~A[0])^1;
 end
-assign counter=counter_down;
 endmodule
 ```
 
 ### RTL LOGIC UP COUNTER AND DOWN COUNTER  
 #### UP COUNTER:
-![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/abdfcfe1-d4ca-4d78-8d26-1c649d60fb8b)
+![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/87e978f7-3a69-429d-b103-97759ddcfaa3)
+
 
 #### DOWN COUNTER:
-![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/9bc23ea0-6916-4e4d-b19c-136a67875ed9)
+![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/83caeda7-7ecf-4445-a2a4-4e7a1ff31b7a)
+
 
 
 ### TIMING DIGRAMS FOR COUNTER  
 #### UP COUNTER
-![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/f10fd62c-0a15-4e3d-a5a6-d9eca2b7956b)
+![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/cf617a88-0d0c-4486-b5b7-85afb6e4eed8)
+
 
 #### DOWN COUNTER
-![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/557cffc5-394c-485e-959e-280ac9e06e49)
+![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/cd9c174e-2ad3-4a5e-8b21-a7218f621308)
+
 
 ### TRUTH TABLE 
 #### UP COUNTER
-![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/2a023b75-b267-4659-82a5-3fba0202b777)
+![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/b257f2e3-6935-4b6f-b6b0-49a32cd6ce97)
+
 
 #### DOWN COUNTER
-![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/af1d2d69-95e1-4c30-8482-d0951a7d62f6)
+![image](https://github.com/ATHMAJ03/Exp-7-Synchornous-counters-/assets/118753139/825cd60c-5e38-44c2-a589-d8abc30c2abe)
+
 
 ### RESULTS 
 Thus Synchornous counters up counter and down counter circuit are studied and the truth table for different logic gates are verified.
